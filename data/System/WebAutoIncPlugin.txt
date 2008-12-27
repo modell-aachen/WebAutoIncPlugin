@@ -24,7 +24,7 @@ WebAutoIncPlugin is most useful for application developers.
 | =redirectto= | reserved for future use | '' |
 
 ---++ Examples
-   * %SCRIPTURL{rest}%/WebAutoIncPlugin/create?newweb=Sandbox.BoxAUTOINC0 creates a new Box web (as a subweb of Sandbox) with increasing numbers as suffix.
+   * %SCRIPTURL{rest}%/WebAutoIncPlugin/create?newweb=Sandbox.BoxAUTOINC0&baseweb=_default&nosearchall=off creates a new Box web (as a subweb of Sandbox) with increasing numbers as suffix.
 
 ---++ Installation Instructions
 

@@ -19,7 +19,7 @@ use strict;
 require Foswiki::Func;    # The plugins API
 require Foswiki::Plugins; # For the API version
 
-our $VERSION = '$Rev: 1340 $';
+our $VERSION = '$Rev$';
 our $RELEASE = '2008-12-27';
 our $SHORTDESCRIPTION = 'Alternative to bin/manage?action=createweb. Adds AUTOINC feature.';
 our $NO_PREFS_IN_TOPIC = 1;
@@ -176,7 +176,7 @@ sub restCreate {
     use Foswiki::AccessControlException;
 
     try {
-        createWeb( $theNewWeb, $theBaseWeb, $opts );
+        $theNewWeb = createWeb( $theNewWeb, $theBaseWeb, $opts );
       }
       catch Error::Simple with {
         my $e = shift;
