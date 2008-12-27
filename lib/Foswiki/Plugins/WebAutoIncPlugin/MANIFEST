@@ -1,0 +1,4 @@
+# Release manifest for WebAutoIncPlugin
+data/System/WebAutoIncPlugin.txt 0644 Documentation
+lib/Foswiki/Plugins/WebAutoIncPlugin.pm 0644 Perl module
+

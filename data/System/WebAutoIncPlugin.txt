@@ -1,0 +1,44 @@
+---+!! !WebAutoIncPlugin
+<!--
+One line description, required for extensions repository catalog.
+   * Set SHORTDESCRIPTION = Alternative to bin/manage?action=createweb. Adds AUTOINC feature.
+-->
+%SHORTDESCRIPTION%
+
+%TOC%
+
+This is a simple wrapper for the traditional =bin/manage?action=createweb= call, which
+just adds the AUTOINC feature known from topics. It is implemented RESTfully.
+
+WebAutoIncPlugin is most useful for application developers.
+
+---++ Usage
+
+| *Parameter* | *Description* | *Default* |
+| =newweb= | Name of the new web. May include a =AUTOINC0= suffix. | '' |
+| =baseweb= | Name of the web to copy to create the new web | '' |
+| =webbgcolor= | value for WEBBGCOLOR | '' |
+| =sitemapwhat= | Value for SITEMAPWHAT | '' |
+| =sitemapuseto= | Value for SITEMAPUSETO | '' |
+| =nosearchall= | Value for NOSEARCHALL | '' |
+| =redirectto= | reserved for future use | '' |
+
+---++ Examples
+   * %SCRIPTURL{rest}%/WebAutoIncPlugin/create?newweb=Sandbox.BoxAUTOINC0 creates a new Box web (as a subweb of Sandbox) with increasing numbers as suffix.
+
+---++ Installation Instructions
+
+%$INSTALL_INSTRUCTIONS%
+
+---++ Info
+
+|  Author(s): | Foswiki:Main.OliverKrueger |
+|  Copyright: | &copy; 2008, Foswiki:Main.OliverKrueger, Wiki-One |
+|  License: | [[http://www.gnu.org/licenses/gpl.html][GPL (Gnu General Public License)]] |
+|  Version: | 2008-12-27 |
+|  Change History: | <!-- versions below in reverse order -->&nbsp; |
+|  27 Dec 2008: | initial release |
+|  Dependencies: | %$DEPENDENCIES% |
+|  Home page: | http://foswiki.org/Extensions/WebAutoIncPlugin |
+
+<!-- Do _not_ attempt to edit this topic; it is auto-generated. -->
