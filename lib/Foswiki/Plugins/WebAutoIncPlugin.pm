@@ -16,21 +16,22 @@ package Foswiki::Plugins::WebAutoIncPlugin;
 # Always use strict to enforce variable scoping
 use strict;
 
-require Foswiki::Func;    # The plugins API
-require Foswiki::Plugins; # For the API version
+require Foswiki::Func;       # The plugins API
+require Foswiki::Plugins;    # For the API version
 
 our $VERSION = '$Rev$';
 our $RELEASE = '2008-12-27';
-our $SHORTDESCRIPTION = 'Alternative to bin/manage?action=createweb. Adds AUTOINC feature.';
+our $SHORTDESCRIPTION =
+  'Alternative to bin/manage?action=createweb. Adds AUTOINC feature.';
 our $NO_PREFS_IN_TOPIC = 1;
 
 sub initPlugin {
-    my( $topic, $web, $user, $installWeb ) = @_;
+    my ( $topic, $web, $user, $installWeb ) = @_;
 
     # check for Plugins.pm versions
-    if( $Foswiki::Plugins::VERSION < 2.0 ) {
+    if ( $Foswiki::Plugins::VERSION < 2.0 ) {
         Foswiki::Func::writeWarning( 'Version mismatch between ',
-                                     __PACKAGE__, ' and Plugins.pm' );
+            __PACKAGE__, ' and Plugins.pm' );
         return 0;
     }
 
@@ -95,8 +96,7 @@ sub restCreate {
     if ( $query->param('newweb') =~ m/^($webRE)$/o ) { $theNewWeb = $1; }
     unless ($theNewWeb) {
         print CGI::header(
-            -status => "500 newweb parameter missing or invalid." )
-          ;
+            -status => "500 newweb parameter missing or invalid." );
         print "\n\n";
         print "<h1> newweb parameter missing or invalid. </h1>";
         return 0;
@@ -177,19 +177,19 @@ sub restCreate {
 
     try {
         $theNewWeb = createWeb( $theNewWeb, $theBaseWeb, $opts );
-      }
-      catch Error::Simple with {
+    }
+    catch Error::Simple with {
         my $e = shift;
         print CGI::header( -status => "500 " . $e->stringify() );
         print "\n\n" . $e->stringify();
         return 0;
-      }
-      catch Foswiki::AccessControlException with {
+    }
+    catch Foswiki::AccessControlException with {
         my $e = shift;
         print CGI::header( -status => "500 " . $e->stringify() );
         print "\n\n" . $e->stringify();
         return 0;
-      };
+    };
 
     return "$theNewWeb\n\n";
 }
