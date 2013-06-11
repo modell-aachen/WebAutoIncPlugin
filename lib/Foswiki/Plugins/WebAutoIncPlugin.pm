@@ -80,8 +80,19 @@ sub createWeb {
 
     $theNewWeb = _getWebname($theNewWeb);
     Foswiki::Func::createWeb( $theNewWeb, $theBaseWeb, $opts );
+    
+    if (defined($opts->{"REDIRECTTO"})) {  
+    	if ($opts->{"REDIRECTTO"} eq 'newweb') {
+    		Foswiki::Func::redirectCgiQuery(
+  				undef, Foswiki::Func::getViewUrl($theNewWeb,"WebHome"), 1);
+  		}
+  		else {
+    		Foswiki::Func::redirectCgiQuery(
+  				undef, $opts->{"REDIRECTTO"}, 1);
+  		}
+  	}		
 
-    return "$theNewWeb";
+    return "$theNewWeb is cool";
 }
 
 sub restCreate {
@@ -165,12 +176,13 @@ sub restCreate {
         }
     }
 
-    #	# redirectto param
-    #   # will be added in the near future
-    #	if ( defined( $query->param('redirectto') ) ) {
-    #		if ( $query->param('redirectto') =~ m/^(.*)$/o ) {
-    #		}
-    #	}
+    	# redirectto param
+       # will be added in the near future
+    	if ( defined( $query->param('redirectto') ) ) {
+    		if ( $query->param('redirectto') =~ m/^(.*)$/o ) {
+    			$opts->{"REDIRECTTO"} = $1;
+    		}
+    	}
 
     use Error qw( :try );
     use Foswiki::AccessControlException;
