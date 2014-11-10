@@ -92,7 +92,7 @@ sub createWeb {
   		}
   	}		
 
-    return "$theNewWeb is cool";
+    return "$theNewWeb";
 }
 
 sub restCreate {
