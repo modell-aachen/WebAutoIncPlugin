@@ -34,7 +34,8 @@ sub initPlugin {
         return 0;
     }
 
-    Foswiki::Func::registerRESTHandler( 'create', \&restCreate );
+    my %restopts = (authenticate => 1, validate => 0, http_allow => 'POST');
+    Foswiki::Func::registerRESTHandler( 'create', \&restCreate, %restopts );
 
     # Plugin correctly initialized
     return 1;
