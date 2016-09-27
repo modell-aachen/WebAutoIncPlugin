@@ -204,7 +204,17 @@ sub restCreate {
         return 0;
       };
 
+    if($Foswiki::cfg{Plugins}{TaskDaemonPlugin}{Enabled}) {
+        _send("$theNewWeb", 'update_web');
+    }
+
     return "$theNewWeb\n\n";
+}
+
+sub _send {
+    my ($message, $type, $wait) = @_;
+
+    Foswiki::Plugins::TaskDaemonPlugin::send($message, $type, 'SolrPlugin', $wait);
 }
 
 1;
