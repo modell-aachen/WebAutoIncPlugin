@@ -34,7 +34,7 @@ sub initPlugin {
         return 0;
     }
 
-    my %restopts = (authenticate => 1, validate => 0, http_allow => 'POST');
+    my %restopts = (authenticate => 1, validate => 0, http_allow => 'POST,GET');
     Foswiki::Func::registerRESTHandler( 'create', \&restCreate, %restopts );
 
     # Plugin correctly initialized
@@ -185,6 +185,13 @@ sub restCreate {
     		}
     	}
 
+    # redirect param - like redirectto but less fuss
+    if ( defined( $query->param('redirect') ) ) {
+        if ( $query->param('redirect') =~ m/^(.*)$/o ) {
+            $opts->{"REDIRECTTO"} = $1;
+        }
+    }
+
     use Error qw( :try );
     use Foswiki::AccessControlException;
 
@@ -204,7 +211,17 @@ sub restCreate {
         return 0;
       };
 
+    if($Foswiki::cfg{Plugins}{TaskDaemonPlugin}{Enabled}) {
+        _send("$theNewWeb", 'update_web');
+    }
+
     return "$theNewWeb\n\n";
+}
+
+sub _send {
+    my ($message, $type, $wait) = @_;
+
+    Foswiki::Plugins::TaskDaemonPlugin::send($message, $type, 'SolrPlugin', $wait);
 }
 
 1;
