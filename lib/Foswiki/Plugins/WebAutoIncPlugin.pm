@@ -185,6 +185,13 @@ sub restCreate {
     		}
     	}
 
+    # redirect param - like redirectto but less fuss
+    if ( defined( $query->param('redirect') ) ) {
+        if ( $query->param('redirect') =~ m/^(.*)$/o ) {
+            $opts->{"REDIRECTTO"} = $1;
+        }
+    }
+
     use Error qw( :try );
     use Foswiki::AccessControlException;
 
